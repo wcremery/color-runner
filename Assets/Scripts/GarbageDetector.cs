@@ -22,6 +22,7 @@ public class GarbageDetector : MonoBehaviour
             //Debug.Log("[Recycle] Starting to look list, number = "+ toRecycle.Count);
             GameObject entity = toRecycle[i];
              Debug.Log(entity.name + " is visible = " + entity.GetComponent<Renderer>().isVisible);
+            //WARNING Not working when in EDITOR
             if (!entity.GetComponent<Renderer>().isVisible)
             {
                 Debug.Log("[Recycle] Recycling object ");
