@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public Player player;
-    private const int RESETLIMIT = 20;
+    private const int RESETLIMIT = 1000;
     void Start()
     {
         
