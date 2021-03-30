@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]private LayerMask platformsLayerMask;
-    [SerializeField] private LayerMask deathLayerMask;
-    public new Rigidbody2D rigidbody;
+    [Header("Layers Masks")]
+        [SerializeField]private LayerMask platformsLayerMask;
+        [SerializeField] private LayerMask deathLayerMask;
+    public Rigidbody2D myRigidbody;
     public BoxCollider2D boxCollider2D;
     public GameManager gameManager;
     private float jumpVelocity = 6f;
     private float moveSpeed =1f;
+    public ColorType colorType;
+
     // Start is called before the first frame update
 
 
@@ -19,9 +22,9 @@ public class Player : MonoBehaviour
     {
         if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
-            rigidbody.velocity = Vector2.up * jumpVelocity;
+            myRigidbody.velocity = Vector2.up * jumpVelocity;
         }
-        rigidbody.velocity = new Vector2(moveSpeed, rigidbody.velocity.y);
+        myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
         
     }
     private bool IsOnDeath()
@@ -38,16 +41,34 @@ public class Player : MonoBehaviour
     }
     private bool IsAgainstWallRight()
     {
-        RaycastHit2D raycastHit2D = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size*0.9f, 0f, Vector2.right, 0.10f, platformsLayerMask);
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(gameObject.transform.position, Vector2.right, 0.10f, platformsLayerMask);
         Debug.DrawLine(gameObject.transform.position, raycastHit2D.point, Color.green, 100f);
         return raycastHit2D.collider != null;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        GameObject collider = collision.gameObject;
         if (IsAgainstWallRight() || IsOnDeath())
         {
-            gameManager.GameOver();
+            GameOver();
+        }
+        else
+        {
+            Platform platform = collider.GetComponent<Platform>();
+            if (platform != null)
+            {
+                if(platform.colorType != ColorType.Null && platform.colorType != colorType)
+                {
+                    GameOver();
+                }
+            }
         }
     }
+
+    private void GameOver()
+    {
+        gameManager.GameOver();
+    }
+    
 }

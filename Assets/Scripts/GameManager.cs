@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Player player;
+    private const int RESETLIMIT = 20;
     void Start()
     {
         
@@ -13,7 +14,24 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (player.transform.position.x > RESETLIMIT)
+        {
+            Debug.Log("[RELOAD] X reset");
+            GameObject[] gameObjects = FindObjectsOfType<GameObject>();
+            foreach(GameObject entity in gameObjects)
+            {
+                entity.transform.position = new Vector3(entity.transform.position.x - RESETLIMIT, entity.transform.position.y, entity.transform.position.z);
+            }
+        }
+        if(player.transform.position.y> RESETLIMIT)
+        {
+            Debug.Log("[RELOAD] Y reset");
+            GameObject[] gameObjects = FindObjectsOfType<GameObject>();
+            foreach (GameObject entity in gameObjects)
+            {
+                entity.transform.position = new Vector3(entity.transform.position.x, entity.transform.position.y - RESETLIMIT, entity.transform.position.z);
+            }
+        }
     }
 
     public void GameOver()

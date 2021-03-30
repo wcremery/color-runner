@@ -177,12 +177,13 @@ MonoBehaviour:
   platformsLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  voidLayerMask:
+  deathLayerMask:
     serializedVersion: 2
-    m_Bits: 512
-  rigidbody: {fileID: 214216863}
+    m_Bits: 0
+  myRigidbody: {fileID: 214216863}
   boxCollider2D: {fileID: 214216867}
   gameManager: {fileID: 724340415}
+  colorType: 0
 --- !u!212 &214216865
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -399,6 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34fac0ca4dc4ce4989b132319110a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 214216864}
 --- !u!4 &724340416
 Transform:
   m_ObjectHideFlags: 0
@@ -424,6 +426,7 @@ GameObject:
   - component: {fileID: 1380669460}
   - component: {fileID: 1380669459}
   - component: {fileID: 1380669461}
+  - component: {fileID: 1380669462}
   m_Layer: 8
   m_Name: plateformTest
   m_TagString: Untagged
@@ -521,6 +524,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.27, y: 1.33}
   m_EdgeRadius: 0
+--- !u!114 &1380669462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380669458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f50e316af03a9943827794f20fa80e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorType: 0
+  spriteAtlas: {fileID: 4343727234628468602, guid: c622cd4b2e3a1a34bb6b3e9ec385c391,
+    type: 2}
 --- !u!1 &1386140363
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,6 +658,7 @@ GameObject:
   - component: {fileID: 2120661218}
   - component: {fileID: 2120661217}
   - component: {fileID: 2120661216}
+  - component: {fileID: 2120661219}
   m_Layer: 8
   m_Name: plateformMoving
   m_TagString: Untagged
@@ -737,3 +756,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2120661219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120661215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f50e316af03a9943827794f20fa80e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorType: 2
+  spriteAtlas: {fileID: 4343727234628468602, guid: c622cd4b2e3a1a34bb6b3e9ec385c391,
+    type: 2}
