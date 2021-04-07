@@ -94,7 +94,7 @@ public class PlatformManager : MonoBehaviour
     /// </summary>
     private void DeterminePlatformPosition()
     {
-        float spacement = 6f;
+        float spacement = Random.Range(6, 9);
         platformPositionOnX = platformPlayerIsOn.GetComponent<Platform>().PositionOnX + spacement;
     }
 
@@ -103,8 +103,8 @@ public class PlatformManager : MonoBehaviour
     /// </summary>
     private void DeterminePlatformSize()
     {
-        platformWidth = 4.02f;
-        platformHeight = 1.93f;
+        platformWidth = Random.Range(2, 6);
+        platformHeight = Random.Range(1, 6);
     }
 
     /// <summary>
