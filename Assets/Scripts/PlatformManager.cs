@@ -14,10 +14,6 @@ public class PlatformManager : MonoBehaviour
     public Sprite yellowSprite;
     #endregion
 
-    #region constants
-    private const int NUMBER_PLATFORMS = 2;
-    #endregion
-
     #region properties
     private ColorType platformColorType;
     private Sprite platformSprite;
@@ -25,7 +21,6 @@ public class PlatformManager : MonoBehaviour
     private float platformPositionOnY;
     private float platformWidth;
     private float platformHeight;
-    private GameObject[] nextPlatformsArray = new GameObject[NUMBER_PLATFORMS];
     private GameObject platformPlayerIsOn; // platform before the two next one
     #endregion
 
