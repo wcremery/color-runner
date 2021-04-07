@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using Random = UnityEngine.Random;
 
 public class PlatformManager : MonoBehaviour
 {
@@ -15,12 +16,12 @@ public class PlatformManager : MonoBehaviour
     #endregion
 
     #region properties
-    private ColorType platformColorType;
     private Sprite platformSprite;
     private float platformPositionOnX;
     private float platformPositionOnY;
     private float platformWidth;
     private float platformHeight;
+    private ColorType platformColorType;
     private GameObject platformPlayerIsOn; // platform before the two next one
     #endregion
 
@@ -74,6 +75,7 @@ public class PlatformManager : MonoBehaviour
         nextPlatform.GetComponent<Platform>().PositionOnX = platformPositionOnX;
         nextPlatform.GetComponent<Platform>().Width = platformWidth;
         nextPlatform.GetComponent<Platform>().Height = platformHeight;
+        nextPlatform.GetComponent<Platform>().ColorType = platformColorType;
     }
 
     /// <summary>
@@ -110,23 +112,28 @@ public class PlatformManager : MonoBehaviour
     /// </summary>
     private void SelectPlatformColorType()
     {
-        switch (platformColorType)
+        int index = Random.Range(1, 5);
+        switch (index)
         {
-            case ColorType.Blue:
+            case 1:
+                platformColorType = ColorType.Blue;
                 platformSprite = blueSprite;
                 break;
-            case ColorType.Green:
+            case 2:
+                platformColorType = ColorType.Green;
                 platformSprite = greenSprite;
                 break;
-            case ColorType.Red:
+            case 3:
+                platformColorType = ColorType.Red;
                 platformSprite = redSprite;
                 break;
-            case ColorType.Yellow:
+            case 4:
+                platformColorType = ColorType.Yellow;
                 platformSprite = yellowSprite;
                 break;
             default:
-                platformSprite = redSprite;
-                //Debug.Log("None sprite selected");
+                platformColorType = ColorType.Null;
+                Debug.Log("None sprite selected");
                 break;
         }
     }
