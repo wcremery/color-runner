@@ -237,8 +237,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 15827571}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.47, y: 0.342, z: 0}
-  m_LocalScale: {x: 4, y: 10.675765, z: 1}
+  m_LocalPosition: {x: -5.807, y: 0.342, z: 0}
+  m_LocalScale: {x: 1.3810146, y: 10.675765, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -302,11 +302,11 @@ MonoBehaviour:
     m_Bits: 256
   deathLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   myRigidbody: {fileID: 214216863}
   boxCollider2D: {fileID: 214216867}
   gameManager: {fileID: 724340415}
-  colorType: 0
+  colorType: 2
 --- !u!212 &214216865
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -409,9 +409,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: b3df0ba9ffb81784fb4b82a5941a18df,
+  m_Actions: {fileID: -944628639613478452, guid: 002e4b53d3c39454f9fb2bc86a4c20d7,
     type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -422,9 +422,39 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 214216864}
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3fa086bf-fb21-4286-9422-4d1d871429d8
+    m_ActionName: Player/Jump[/Keyboard/space,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 214216864}
+        m_MethodName: ColorChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 677c6a21-7b76-4333-9828-8fe679776b9a
+    m_ActionName: Player/ColorChange[/Keyboard/a,/Keyboard/z,/Keyboard/e,/Keyboard/r,/Keyboard/q,/Keyboard/w,/Keyboard/e,/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
