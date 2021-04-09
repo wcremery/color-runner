@@ -306,7 +306,7 @@ MonoBehaviour:
   myRigidbody: {fileID: 214216863}
   boxCollider2D: {fileID: 214216867}
   gameManager: {fileID: 724340415}
-  colorType: 2
+  colorType: 0
 --- !u!212 &214216865
 SpriteRenderer:
   m_ObjectHideFlags: 0

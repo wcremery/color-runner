@@ -111,7 +111,6 @@ public class Player : MonoBehaviour
         {
             colorType = colorToChange;
             controlsColorNumber++;
-            Debug.Log("[Controls] : number of color pressed = " + controlsColorNumber);
         }
         else
         {
@@ -121,5 +120,7 @@ public class Player : MonoBehaviour
                 colorType = ColorType.Null;
             }
         }
+        Debug.Log("[Controls] : number of color pressed = " + controlsColorNumber);
+        Debug.Log("[Controls] : Actual Color Type " + colorType);
     }
 }
