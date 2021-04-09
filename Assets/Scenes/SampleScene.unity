@@ -411,7 +411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 002e4b53d3c39454f9fb2bc86a4c20d7,
     type: 3}
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -441,18 +441,63 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 214216864}
-        m_MethodName: ColorChange
-        m_Mode: 0
+        m_MethodName: ColorChangeInt
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 677c6a21-7b76-4333-9828-8fe679776b9a
-    m_ActionName: Player/ColorChange[/Keyboard/a,/Keyboard/z,/Keyboard/e,/Keyboard/r,/Keyboard/q,/Keyboard/w,/Keyboard/e,/Keyboard/r]
+    m_ActionId: 0dafa2f3-8d87-4176-a6d5-ab9347ffaa1a
+    m_ActionName: Player/Yellow
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 214216864}
+        m_MethodName: ColorChangeInt
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 08daea33-adff-4532-8334-5b0ebee60451
+    m_ActionName: Player/Red
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 214216864}
+        m_MethodName: ColorChangeInt
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 48fd3e3a-9420-4db0-8fa1-16bf05f184f2
+    m_ActionName: Player/Green
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 214216864}
+        m_MethodName: ColorChangeInt
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c3da2aa5-f9e8-49e8-bd7f-f75704d689bb
+    m_ActionName: Player/Blue
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Player

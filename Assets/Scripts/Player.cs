@@ -8,12 +8,14 @@ public class Player : MonoBehaviour
     [Header("Layers Masks")]
         [SerializeField]private LayerMask platformsLayerMask;
         [SerializeField] private LayerMask deathLayerMask;
+
     public Rigidbody2D myRigidbody;
     public BoxCollider2D boxCollider2D;
     public GameManager gameManager;
     private float jumpVelocity = 6f;
     private float moveSpeed =1f;
     public ColorType colorType;
+    private int controlsColorNumber = 0;
 
     // Start is called before the first frame update
 
@@ -22,24 +24,31 @@ public class Player : MonoBehaviour
     void Update()
     {
         myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
-
     }
     private bool IsOnDeath()
     {
         RaycastHit2D raycastHit2D = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f, Vector2.down, 0.1f, deathLayerMask);
-        Debug.DrawLine(gameObject.transform.position, raycastHit2D.point, Color.green, 100f);
+        if (raycastHit2D.collider != null)
+        {
+            Debug.DrawLine(gameObject.transform.position, raycastHit2D.point, Color.green, 100f);
+        }
         return raycastHit2D.collider != null;
     }
     private bool IsGrounded()
     {
-       RaycastHit2D raycastHit2D = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f, Vector2.down, 0.1f, platformsLayerMask);
-        Debug.DrawLine(gameObject.transform.position, raycastHit2D.point, Color.green, 100f);
+       RaycastHit2D raycastHit2D = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f, Vector2.down, 0.5f, platformsLayerMask);
+        if (raycastHit2D.collider != null)
+        {
+            Debug.DrawLine(gameObject.transform.position, raycastHit2D.point, Color.green, 100f);
+        }
         return raycastHit2D.collider != null;
     }
     private bool IsAgainstWallRight()
     {
         RaycastHit2D raycastHit2D = Physics2D.Raycast(gameObject.transform.position, Vector2.right, 0.50f, platformsLayerMask);
-        Debug.DrawLine(gameObject.transform.position, raycastHit2D.point, Color.green, 100f);
+        if (raycastHit2D.collider != null) {
+            Debug.DrawLine(gameObject.transform.position, raycastHit2D.point, Color.green, 100f);
+        }
         return raycastHit2D.collider != null;
     }
 
@@ -71,37 +80,46 @@ public class Player : MonoBehaviour
         
         gameManager.GameOver();
     }
-    public void Jump(InputAction.CallbackContext context)
+    public void OnJump()
     {
+        Debug.Log("[Controls] jump");
         if (IsGrounded())
         {
             myRigidbody.velocity = Vector2.up * jumpVelocity;
         }
         
     }
-    public void ColorChange(InputAction.CallbackContext context)
+    public void OnYellow(InputValue input)
     {
-
+        ColorChange(input, ColorType.Yellow);
     }
-    public void ColorChangeYellow()
+    public void OnBlue(InputValue input)
     {
-
+        ColorChange(input, ColorType.Blue);
     }
-    public void ColorChangeBlue()
+    public void OnRed(InputValue input)
     {
-
-
+        ColorChange(input, ColorType.Red);
     }
-    public void ColorChangeRed()
+    public void OnGreen(InputValue input)
     {
-
+        ColorChange(input, ColorType.Green);
     }
-    public void ColorChangeGreen()
+    private void ColorChange(InputValue input, ColorType colorToChange) 
     {
-
-    }
-    public void ColorChangeInt(int value)
-    {
-
+        if (input.isPressed)
+        {
+            colorType = colorToChange;
+            controlsColorNumber++;
+            Debug.Log("[Controls] : number of color pressed = " + controlsColorNumber);
+        }
+        else
+        {
+            controlsColorNumber--;
+            if (controlsColorNumber == 0)
+            {
+                colorType = ColorType.Null;
+            }
+        }
     }
 }
