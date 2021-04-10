@@ -9,9 +9,11 @@ public class Player : MonoBehaviour
         [SerializeField] private LayerMask deathLayerMask;
     public Rigidbody2D myRigidbody;
     public BoxCollider2D boxCollider2D;
+    public Animator animator;
     public GameManager gameManager;
     private float jumpVelocity = 6f;
     private float moveSpeed =1f;
+    private bool run = false;
     public ColorType colorType;
 
     // Start is called before the first frame update
@@ -20,12 +22,20 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
+        if (run)
         {
-            myRigidbody.velocity = Vector2.up * jumpVelocity;
+            if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
+            {
+                myRigidbody.velocity = Vector2.up * jumpVelocity;
+            }
+            myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
         }
-        myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
         
+    }
+    private void StartRunning()
+    {
+        run = true;
+        animator.SetBool("Run", run);
     }
     private bool IsOnDeath()
     {
