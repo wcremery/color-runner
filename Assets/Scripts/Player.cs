@@ -11,10 +11,12 @@ public class Player : MonoBehaviour
 
     public Rigidbody2D myRigidbody;
     public BoxCollider2D boxCollider2D;
+    public Animator animator;
     public GameManager gameManager;
     public float timeLimitJump = 0.2f;
     private float jumpVelocity = 6f;
     private float moveSpeed =1f;
+    private bool run = false;
     public ColorType colorType;
     private int controlsColorNumber = 0;
     private float timeJump;
@@ -26,7 +28,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (run)
+        {
         myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
+        }
+    }
+    private void StartRunning()
+    {
+        run = true;
+        animator.SetBool("Run", run);
     }
     private bool IsOnDeath()
     {
