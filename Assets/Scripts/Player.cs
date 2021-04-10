@@ -16,13 +16,13 @@ public class Player : MonoBehaviour
     public float timeLimitJump = 0.2f;
     private float jumpVelocity = 6f;
     private float moveSpeed =1f;
-    private bool run = false;
+    private bool run = true;
     public ColorType colorType;
     private int controlsColorNumber = 0;
     private float timeJump;
-    private bool isJumping = false;
+    private bool smallJumpDetector = false;
 
-    // Start is called before the first frame update
+ 
 
 
     // Update is called once per frame
@@ -30,8 +30,17 @@ public class Player : MonoBehaviour
     {
         if (run)
         {
-        myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
+            myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
         }
+        /*if (myRigidbody.velocity.y > 0)
+        {
+           animator..time = desired_play_time;
+            animation["MyAnimation"].speed = 0.0;
+        }
+        else if(myRigidbody.velocity.y < 0)
+        {
+            animator.SetBool("Jump", true);
+        }*/
     }
     private void StartRunning()
     {
@@ -69,7 +78,8 @@ public class Player : MonoBehaviour
     {
         if (IsGrounded())
         {
-            isJumping = false;
+            smallJumpDetector = false;
+            animator.SetBool("Jump", false);
         }
         Debug.Log("[Collision] Testing if Game Over");
         GameObject collider = collision.gameObject;
@@ -99,18 +109,19 @@ public class Player : MonoBehaviour
     public void OnJump(InputValue input)
     {
         Debug.Log("[Controls] jump");
-        if (IsGrounded() && input.isPressed)
+        if (run && IsGrounded() && input.isPressed)
         {
             myRigidbody.velocity = Vector2.up * jumpVelocity;
             timeJump = Time.time;
-            isJumping = true;
+            smallJumpDetector = true;
+            animator.SetBool("Jump", true);
         }
         else
         {
             //Debug.Log(timeJump +" " + timeLimitJump + " " + " ");
-            if (timeJump + timeLimitJump > Time.time && isJumping)
+            if (timeJump + timeLimitJump > Time.time && smallJumpDetector)
             {
-                isJumping = false;
+                smallJumpDetector = false;
                 Debug.Log("[Controls] Small Jump");
                 myRigidbody.velocity += Vector2.down * jumpVelocity/2;
             }

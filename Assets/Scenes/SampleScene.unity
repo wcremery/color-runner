@@ -257,6 +257,7 @@ GameObject:
   - component: {fileID: 214216863}
   - component: {fileID: 214216867}
   - component: {fileID: 214216868}
+  - component: {fileID: 214216869}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -305,7 +306,7 @@ MonoBehaviour:
     m_Bits: 512
   myRigidbody: {fileID: 214216863}
   boxCollider2D: {fileID: 214216867}
-  animator: {fileID: 214216868}
+  animator: {fileID: 214216869}
   gameManager: {fileID: 724340415}
   timeLimitJump: 1
   colorType: 0
@@ -506,6 +507,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!95 &214216869
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -1015,7 +1017,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120661215}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.25, y: 0, z: 0}
+  m_LocalPosition: {x: 7.25, y: 12.36, z: 0}
   m_LocalScale: {x: 4, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
