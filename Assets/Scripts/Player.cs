@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     public ColorType colorType;
     private int controlsColorNumber = 0;
     private float timeJump;
-    
+    private bool isJumping = false;
 
     // Start is called before the first frame update
 
@@ -57,6 +57,10 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (IsGrounded())
+        {
+            isJumping = false;
+        }
         Debug.Log("[Collision] Testing if Game Over");
         GameObject collider = collision.gameObject;
         if (IsAgainstWallRight() || IsOnDeath())
@@ -80,7 +84,6 @@ public class Player : MonoBehaviour
 
     private void GameOver()
     {
-        
         gameManager.GameOver();
     }
     public void OnJump(InputValue input)
@@ -88,16 +91,16 @@ public class Player : MonoBehaviour
         Debug.Log("[Controls] jump");
         if (IsGrounded() && input.isPressed)
         {
-
             myRigidbody.velocity = Vector2.up * jumpVelocity;
             timeJump = Time.time;
-
+            isJumping = true;
         }
         else
         {
             //Debug.Log(timeJump +" " + timeLimitJump + " " + " ");
-            if (timeJump + timeLimitJump > Time.time)
+            if (timeJump + timeLimitJump > Time.time && isJumping)
             {
+                isJumping = false;
                 Debug.Log("[Controls] Small Jump");
                 myRigidbody.velocity += Vector2.down * jumpVelocity/2;
             }
