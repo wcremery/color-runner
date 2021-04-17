@@ -8,11 +8,15 @@ public class Player : MonoBehaviour
     [Header("Layers Masks")]
         [SerializeField]private LayerMask platformsLayerMask;
         [SerializeField] private LayerMask deathLayerMask;
-
-    public Rigidbody2D myRigidbody;
-    public BoxCollider2D boxCollider2D;
-    public Animator animator;
-    public GameManager gameManager;
+    [Header("2D collision")]
+        public Rigidbody2D myRigidbody;
+        public BoxCollider2D boxCollider2D;
+        public GameManager gameManager;
+    [Header("Player Animation")]
+        public SpriteRenderer spriteRenderer;
+        public Animator animator;
+   
+  
     public float timeLimitJump = 0.2f;
     private float jumpVelocity = 6f;
     private float moveSpeed =1f;
@@ -22,7 +26,12 @@ public class Player : MonoBehaviour
     private float timeJump;
     private bool smallJumpDetector = false;
 
- 
+    //colors :
+    private Color yellow = new Color(255, 255, 0);
+    private Color blue = new Color(0, 0, 255);
+    private Color green = new Color(0, 255, 0);
+    private Color red = new Color(255, 0, 0);
+    private Color white = new Color(255, 255, 255);
 
 
     // Update is called once per frame
@@ -128,21 +137,32 @@ public class Player : MonoBehaviour
         }
         
     }
+
+    //FFFFFF
     public void OnYellow(InputValue input)
     {
         ColorChange(input, ColorType.Yellow);
+        //ffff00
+        
+        
     }
     public void OnBlue(InputValue input)
     {
         ColorChange(input, ColorType.Blue);
+        //0000FF
+   
     }
     public void OnRed(InputValue input)
     {
         ColorChange(input, ColorType.Red);
+        //FF0000
+    
     }
     public void OnGreen(InputValue input)
     {
         ColorChange(input, ColorType.Green);
+        //00FF00
+       
     }
     private void ColorChange(InputValue input, ColorType colorToChange) 
     {
@@ -157,9 +177,39 @@ public class Player : MonoBehaviour
             if (controlsColorNumber == 0)
             {
                 colorType = ColorType.Null;
+                
             }
         }
         Debug.Log("[Controls] : number of color pressed = " + controlsColorNumber);
         Debug.Log("[Controls] : Actual Color Type " + colorType);
+        updateColor();
+    }
+    private void updateColor()
+    {
+        Color change;
+        switch (colorType)
+        {
+            case ColorType.Red:
+                change = red;
+                break;
+            case ColorType.Green:
+                change = green;
+                break;
+            case ColorType.Blue:
+                change = blue;
+                break;
+            case ColorType.Yellow:
+                change = yellow;
+                break;
+            case ColorType.Null:
+                change = white;
+                break;
+            default:
+                change = white;
+                break;
+        }
+        spriteRenderer.color = change;
     }
 }
+
+
