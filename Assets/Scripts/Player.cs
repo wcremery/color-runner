@@ -15,23 +15,19 @@ public class Player : MonoBehaviour
     [Header("Player Animation")]
         public SpriteRenderer spriteRenderer;
         public Animator animator;
-   
-  
+
+    public ColorReference colorType;
     public float timeLimitJump = 0.2f;
+
     private float jumpVelocity = 6f;
     private float moveSpeed =1f;
     private bool run = true;
-    public ColorType.ColorList colorType;
+  
     private int controlsColorNumber = 0;
     private float timeJump;
     private bool smallJumpDetector = false;
 
-    //colors :
-    private Color yellow = new Color(255, 255, 0);
-    private Color blue = new Color(0, 0, 255);
-    private Color green = new Color(0, 255, 0);
-    private Color red = new Color(255, 0, 0);
-    private Color white = new Color(255, 255, 255);
+
 
 
     // Update is called once per frame
@@ -102,7 +98,7 @@ public class Player : MonoBehaviour
             Platform platform = collider.GetComponent<Platform>();
             if (platform != null)
             {
-                if(platform.colorType != ColorType.ColorList.Null && platform.colorType != colorType)
+                if(platform.colorType != ColorType.ColorList.Null && platform.colorType != colorType.Value)
                 {
                     Debug.Log("[Collision] Game Over Wrong Color");
                     GameOver();
@@ -168,7 +164,7 @@ public class Player : MonoBehaviour
     {
         if (input.isPressed)
         {
-            colorType = colorToChange;
+            colorType.Variable.value = colorToChange;
             controlsColorNumber++;
         }
         else
@@ -176,7 +172,7 @@ public class Player : MonoBehaviour
             controlsColorNumber--;
             if (controlsColorNumber == 0)
             {
-                colorType = ColorType.ColorList.Null;
+                colorType.Variable.value = ColorType.ColorList.Null;
                 
             }
         }
@@ -186,7 +182,7 @@ public class Player : MonoBehaviour
     }
     private void updateColor()
     {
-        spriteRenderer.color = ColorType.getColor(colorType);
+        spriteRenderer.color = ColorType.getColor(colorType.Value);
     }
 }
 

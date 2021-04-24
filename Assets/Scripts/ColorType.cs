@@ -16,7 +16,8 @@ public static class ColorType
     public static Color getColor(ColorList color)
     {
         Color change;
-        switch (color){
+        switch (color)
+        {
               case ColorList.Red:
                 change = redColor;
                 break;
