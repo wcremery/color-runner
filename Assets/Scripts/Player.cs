@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     private float jumpVelocity = 6f;
     private float moveSpeed =1f;
     private bool run = true;
-    public ColorType colorType;
+    public ColorType.ColorList colorType;
     private int controlsColorNumber = 0;
     private float timeJump;
     private bool smallJumpDetector = false;
@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
             Platform platform = collider.GetComponent<Platform>();
             if (platform != null)
             {
-                if(platform.colorType != ColorType.Null && platform.colorType != colorType)
+                if(platform.colorType != ColorType.ColorList.Null && platform.colorType != colorType)
                 {
                     Debug.Log("[Collision] Game Over Wrong Color");
                     GameOver();
@@ -141,30 +141,30 @@ public class Player : MonoBehaviour
     //FFFFFF
     public void OnYellow(InputValue input)
     {
-        ColorChange(input, ColorType.Yellow);
+        ColorChange(input, ColorType.ColorList.Yellow);
         //ffff00
         
         
     }
     public void OnBlue(InputValue input)
     {
-        ColorChange(input, ColorType.Blue);
+        ColorChange(input, ColorType.ColorList.Blue);
         //0000FF
    
     }
     public void OnRed(InputValue input)
     {
-        ColorChange(input, ColorType.Red);
+        ColorChange(input, ColorType.ColorList.Red);
         //FF0000
     
     }
     public void OnGreen(InputValue input)
     {
-        ColorChange(input, ColorType.Green);
+        ColorChange(input, ColorType.ColorList.Green);
         //00FF00
        
     }
-    private void ColorChange(InputValue input, ColorType colorToChange) 
+    private void ColorChange(InputValue input, ColorType.ColorList colorToChange) 
     {
         if (input.isPressed)
         {
@@ -176,7 +176,7 @@ public class Player : MonoBehaviour
             controlsColorNumber--;
             if (controlsColorNumber == 0)
             {
-                colorType = ColorType.Null;
+                colorType = ColorType.ColorList.Null;
                 
             }
         }
@@ -186,29 +186,7 @@ public class Player : MonoBehaviour
     }
     private void updateColor()
     {
-        Color change;
-        switch (colorType)
-        {
-            case ColorType.Red:
-                change = red;
-                break;
-            case ColorType.Green:
-                change = green;
-                break;
-            case ColorType.Blue:
-                change = blue;
-                break;
-            case ColorType.Yellow:
-                change = yellow;
-                break;
-            case ColorType.Null:
-                change = white;
-                break;
-            default:
-                change = white;
-                break;
-        }
-        spriteRenderer.color = change;
+        spriteRenderer.color = ColorType.getColor(colorType);
     }
 }
 

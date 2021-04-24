@@ -5,7 +5,7 @@ using UnityEngine.U2D;
 
 public class Platform : Element
 {
-    public ColorType colorType = ColorType.Null;
+    public ColorType.ColorList colorType = ColorType.ColorList.Null;
     public SpriteAtlas spriteAtlas;
     private Sprite[] _sprites;
     private void Start()
