@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
             Platform platform = collider.GetComponent<Platform>();
             if (platform != null)
             {
-                if(platform.colorType != ColorType.Null && platform.colorType != colorType)
+                if(platform.ColorType != ColorType.Null && platform.ColorType != colorType)
                 {
                     Debug.Log("[Collision] Game Over Wrong Color");
                     GameOver();
