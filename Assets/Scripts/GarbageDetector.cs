@@ -6,7 +6,7 @@ public class GarbageDetector : MonoBehaviour
 {
     private List<GameObject> toRecycle;
     public Transform player;
-    private const int OFFSET = 10;
+    [SerializeField]private int OFFSET = 10;
     // Start is called before the first frame update
 
     void Start()

@@ -8,25 +8,49 @@ public class Player : MonoBehaviour
     [Header("Layers Masks")]
         [SerializeField]private LayerMask platformsLayerMask;
         [SerializeField] private LayerMask deathLayerMask;
+    [Header("2D collision")]
+        public Rigidbody2D myRigidbody;
+        public BoxCollider2D boxCollider2D;
+        public GameManager gameManager;
+    [Header("Player Animation")]
+        public SpriteRenderer spriteRenderer;
+        public Animator animator;
 
-    public Rigidbody2D myRigidbody;
-    public BoxCollider2D boxCollider2D;
-    public GameManager gameManager;
+    public ColorReference colorType;
     public float timeLimitJump = 0.2f;
+
     private float jumpVelocity = 6f;
     private float moveSpeed =1f;
-    public ColorType colorType;
+    private bool run = true;
+  
     private int controlsColorNumber = 0;
     private float timeJump;
-    private bool isJumping = false;
+    private bool smallJumpDetector = false;
 
-    // Start is called before the first frame update
+
 
 
     // Update is called once per frame
     void Update()
     {
-        myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
+        if (run)
+        {
+            myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
+        }
+        /*if (myRigidbody.velocity.y > 0)
+        {
+           animator..time = desired_play_time;
+            animation["MyAnimation"].speed = 0.0;
+        }
+        else if(myRigidbody.velocity.y < 0)
+        {
+            animator.SetBool("Jump", true);
+        }*/
+    }
+    private void StartRunning()
+    {
+        run = true;
+        animator.SetBool("Run", run);
     }
     private bool IsOnDeath()
     {
@@ -59,7 +83,8 @@ public class Player : MonoBehaviour
     {
         if (IsGrounded())
         {
-            isJumping = false;
+            smallJumpDetector = false;
+            animator.SetBool("Jump", false);
         }
         Debug.Log("[Collision] Testing if Game Over");
         GameObject collider = collision.gameObject;
@@ -73,7 +98,7 @@ public class Player : MonoBehaviour
             Platform platform = collider.GetComponent<Platform>();
             if (platform != null)
             {
-                if(platform.colorType != ColorType.Null && platform.colorType != colorType)
+                if(platform.colorType != ColorType.ColorList.Null && platform.colorType != colorType.Value)
                 {
                     Debug.Log("[Collision] Game Over Wrong Color");
                     GameOver();
@@ -89,45 +114,57 @@ public class Player : MonoBehaviour
     public void OnJump(InputValue input)
     {
         Debug.Log("[Controls] jump");
-        if (IsGrounded() && input.isPressed)
+        if (run && IsGrounded() && input.isPressed)
         {
             myRigidbody.velocity = Vector2.up * jumpVelocity;
             timeJump = Time.time;
-            isJumping = true;
+            smallJumpDetector = true;
+            animator.SetBool("Jump", true);
         }
         else
         {
             //Debug.Log(timeJump +" " + timeLimitJump + " " + " ");
-            if (timeJump + timeLimitJump > Time.time && isJumping)
+            if (timeJump + timeLimitJump > Time.time && smallJumpDetector)
             {
-                isJumping = false;
+                smallJumpDetector = false;
                 Debug.Log("[Controls] Small Jump");
                 myRigidbody.velocity += Vector2.down * jumpVelocity/2;
             }
         }
         
     }
+
+    //FFFFFF
     public void OnYellow(InputValue input)
     {
-        ColorChange(input, ColorType.Yellow);
+        ColorChange(input, ColorType.ColorList.Yellow);
+        //ffff00
+        
+        
     }
     public void OnBlue(InputValue input)
     {
-        ColorChange(input, ColorType.Blue);
+        ColorChange(input, ColorType.ColorList.Blue);
+        //0000FF
+   
     }
     public void OnRed(InputValue input)
     {
-        ColorChange(input, ColorType.Red);
+        ColorChange(input, ColorType.ColorList.Red);
+        //FF0000
+    
     }
     public void OnGreen(InputValue input)
     {
-        ColorChange(input, ColorType.Green);
+        ColorChange(input, ColorType.ColorList.Green);
+        //00FF00
+       
     }
-    private void ColorChange(InputValue input, ColorType colorToChange) 
+    private void ColorChange(InputValue input, ColorType.ColorList colorToChange) 
     {
         if (input.isPressed)
         {
-            colorType = colorToChange;
+            colorType.Variable.value = colorToChange;
             controlsColorNumber++;
         }
         else
@@ -135,10 +172,18 @@ public class Player : MonoBehaviour
             controlsColorNumber--;
             if (controlsColorNumber == 0)
             {
-                colorType = ColorType.Null;
+                colorType.Variable.value = ColorType.ColorList.Null;
+                
             }
         }
         Debug.Log("[Controls] : number of color pressed = " + controlsColorNumber);
         Debug.Log("[Controls] : Actual Color Type " + colorType);
+        updateColor();
+    }
+    private void updateColor()
+    {
+        spriteRenderer.color = ColorType.getColor(colorType.Value);
     }
 }
+
+
