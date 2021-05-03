@@ -26,7 +26,7 @@ public class PlatformManager : MonoBehaviour
     private float platformPositionOnX;
     private float platformPositionOnY;
     private float platformWidth;
-    private ColorType platformColorType;
+    private ColorType.ColorList platformColorType;
     private GameObject platformPlayerIsOn;
     #endregion
 
@@ -114,23 +114,23 @@ public class PlatformManager : MonoBehaviour
         switch (index)
         {
             case 1:
-                platformColorType = ColorType.Blue;
+                platformColorType = ColorType.ColorList.Blue;
                 platformSprite = blueSprite;
                 break;
             case 2:
-                platformColorType = ColorType.Green;
+                platformColorType = ColorType.ColorList.Green;
                 platformSprite = greenSprite;
                 break;
             case 3:
-                platformColorType = ColorType.Red;
+                platformColorType = ColorType.ColorList.Red;
                 platformSprite = redSprite;
                 break;
             case 4:
-                platformColorType = ColorType.Yellow;
+                platformColorType = ColorType.ColorList.Yellow;
                 platformSprite = yellowSprite;
                 break;
             default:
-                platformColorType = ColorType.Null;
+                platformColorType = ColorType.ColorList.Null;
                 Debug.Log("None sprite selected");
                 break;
         }

@@ -8,7 +8,7 @@ public class Platform : MonoBehaviour
     #region properties
     public GameObject spriteHolderPrefab;
     private GameObject spriteHolderInstance;
-    private ColorType colorType;
+    public ColorType.ColorList colorType;
     private BoxCollider2D boxCollider;
     private float length;
     private float positionOnX;
@@ -24,7 +24,7 @@ public class Platform : MonoBehaviour
         set => textureSprite = value;
     }
     
-    public ColorType ColorType { get => colorType; set => colorType = value; }
+    public ColorType.ColorList ColorType { get => colorType; set => colorType = value; }
     public float PositionOnX { get => positionOnX; set => positionOnX = value; }
     public float PositionOnY { get => positionOnY; set => positionOnY = value; }
     public float Length { get => length; }
