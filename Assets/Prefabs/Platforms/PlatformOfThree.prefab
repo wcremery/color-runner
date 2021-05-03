@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8157811685409152214}
   - component: {fileID: 8157811685409152213}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrassRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 8157811685760445913}
   - component: {fileID: 8157811685760445919}
   - component: {fileID: 8157811685760445912}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrassLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8157811686488813890}
   - component: {fileID: 8157811686488813889}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrassMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 8157811686791939657}
   - component: {fileID: 6064870376768050795}
   - component: {fileID: 7410572958960346027}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlatformOfThree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,3 +332,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteHolderPrefab: {fileID: 2188759945433139014, guid: 462fc5bc244a66a46b65722837d979ef,
     type: 3}
+  colorType: 0

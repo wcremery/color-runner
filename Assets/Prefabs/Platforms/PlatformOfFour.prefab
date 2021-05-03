@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6021869245913829602}
   - component: {fileID: 6021869245913829601}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrassJoinHillLeft2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 751435616698320927}
   - component: {fileID: 1605884085}
   - component: {fileID: 3391411529014006023}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlatformOfFour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,6 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteHolderPrefab: {fileID: 2188759945433139014, guid: 462fc5bc244a66a46b65722837d979ef,
     type: 3}
+  colorType: 0
 --- !u!1 &6021869247299410566
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6021869247299410565}
   - component: {fileID: 6021869247299410564}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrassJoinHillRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6021869247699216740}
   - component: {fileID: 6021869247699216739}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrassJoinHillRight2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6021869247733060717}
   - component: {fileID: 6021869247733060716}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrassJoindHillLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}

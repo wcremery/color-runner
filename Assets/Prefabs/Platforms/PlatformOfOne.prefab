@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4448311546496366135}
   - component: {fileID: 8982550733709639320}
   - component: {fileID: 2578859957406906775}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlatformOfOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,6 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteHolderPrefab: {fileID: 2188759945433139014, guid: 462fc5bc244a66a46b65722837d979ef,
     type: 3}
+  colorType: 0
 --- !u!1 &4448311546750717735
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,7 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4448311546750717734}
   - component: {fileID: 4448311546750717733}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}

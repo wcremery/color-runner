@@ -19,8 +19,8 @@ public class Player : MonoBehaviour
     public ColorReference colorType;
     public float timeLimitJump = 0.2f;
 
-    private float jumpVelocity = 6f;
-    private float moveSpeed =1f;
+    private float jumpVelocity = 10f;
+    private float moveSpeed =6f;
     private bool run = true;
   
     private int controlsColorNumber = 0;

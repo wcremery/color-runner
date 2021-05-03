@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7969040426259320770}
   - component: {fileID: 7969040426259320771}
   - component: {fileID: 7969040426259320828}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,3 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f50e316af03a9943827794f20fa80e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteHolderPrefab: {fileID: 0}
+  colorType: 0

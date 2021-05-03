@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7318987518140330820}
   - component: {fileID: 7318987518140330821}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrassCliffMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 7318987518220401643}
   - component: {fileID: 2125070509706718181}
   - component: {fileID: 3906662803558646268}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlatformOfTwo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteHolderPrefab: {fileID: 2188759945433139014, guid: 462fc5bc244a66a46b65722837d979ef,
     type: 3}
+  colorType: 0
 --- !u!1 &7318987518689024777
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +166,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7318987518689024778}
   - component: {fileID: 7318987518689024779}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GrassCliffLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
