@@ -815,6 +815,7 @@ GameObject:
   - component: {fileID: 250669425}
   - component: {fileID: 250669424}
   - component: {fileID: 250669423}
+  - component: {fileID: 250669427}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -905,6 +906,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &250669427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250669422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
 --- !u!1 &255220245
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,12 +1406,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 214216864}
   score: {fileID: 127395339}
+  bestScore: {fileID: 255220247}
   resetLimit: 1000
   plateformes: {fileID: 1846779490}
   cameraObject: {fileID: 519420028}
   gameOverScreen: {fileID: 2142954403}
   gameOverScore: {fileID: 231884282}
   gameOverBestScore: {fileID: 255220247}
+  platformManager: {fileID: 1846779491}
 --- !u!4 &724340416
 Transform:
   m_ObjectHideFlags: 0
@@ -2439,6 +2457,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1463629526}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1846779491 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2659983159284260233, guid: 891d0c089ee14b6459d5204a48b11fa9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1463629526}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846779490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce9fd951865f7948a888efbf37120e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1940020968
 GameObject:
   m_ObjectHideFlags: 0

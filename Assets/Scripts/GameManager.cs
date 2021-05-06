@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public Player player;
     public TMP_Text score;
+    public TMP_Text bestScore;
     private float scoreCount = 0f;
     private float bestScoreCount = 0f;
     private float multiplier = 0f;
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverScreen;
     public TMP_Text gameOverScore;
     public TMP_Text gameOverBestScore;
+    public PlatformManager platformManager;
 
 
 
@@ -48,6 +50,7 @@ public class GameManager : MonoBehaviour
             //}
             cameraObject.transform.position = new Vector3(cameraObject.transform.position.x - resetLimit, cameraObject.transform.position.y, cameraObject.transform.position.z);
             multiplier++;
+            platformManager.UpdatePlatformPos();
         }
         if(player.transform.position.y> resetLimit)
         {
@@ -58,6 +61,7 @@ public class GameManager : MonoBehaviour
                 entity.position = new Vector3(entity.position.x - resetLimit, entity.position.y, entity.position.z);
             }
             player.transform.position = new Vector3(player.transform.position.x - resetLimit, player.transform.position.y, player.transform.position.z);
+            platformManager.UpdatePlatformPos();
         }
         if ((player.transform.position.x + (multiplier * resetLimit)) - scoreCount > 1)
         {
@@ -70,12 +74,27 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game Over");
-        if (bestScoreCount < scoreCount) bestScoreCount = scoreCount;
+        if (bestScoreCount < scoreCount)
+        {
+            bestScoreCount = scoreCount;
+            bestScore.text = bestScoreCount.ToString();
+        }
+        
         gameOverBestScore.text = bestScoreCount.ToString();
+        bestScore.text= bestScoreCount.ToString();
         gameOverScore.text = scoreCount.ToString();
         gameOverScreen.SetActive(true);
+        scoreCount = 0;
+        score.text = "0";
         Time.timeScale = 0f;
 
+    }
+    public void Restart()
+    {
+        platformManager.Restart();
+        player.transform.position = new Vector3(0, 0, 0);
+        gameOverScreen.SetActive(false);
+        Time.timeScale = 1f;
     }
     private void UpdateScore()
     {

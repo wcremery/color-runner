@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     private float timeJump;
     private bool smallJumpDetector = false;
     private ColorType.ColorList currentPlatformColor = ColorType.ColorList.Null;
+    private bool gameOver = false;
 
 
 
@@ -132,57 +133,81 @@ public class Player : MonoBehaviour
   
     private void GameOver()
     {
-        gameManager.GameOver();
-    }
-    public void OnJump(InputValue input)
-    {
-        Debug.Log("[Controls] jump");
-        if (run && IsGrounded() && input.isPressed)
-        {
-            myRigidbody.velocity = Vector2.up * jumpVelocity;
-            timeJump = Time.time;
-            smallJumpDetector = true;
-            animator.SetBool("Jump", true);
-        }
-        else
-        {
-            //Debug.Log(timeJump +" " + timeLimitJump + " " + " ");
-            if (timeJump + timeLimitJump > Time.time && smallJumpDetector)
-            {
-                smallJumpDetector = false;
-                Debug.Log("[Controls] Small Jump");
-                myRigidbody.velocity += Vector2.down * jumpVelocity/2;
-            }
+        if (!gameOver) {
+            gameOver = true;
+            controlsColorNumber = 0;
+            colorType.Variable.value = ColorType.ColorList.Null;
+            UpdateColor();
+            gameManager.GameOver();
+        
         }
         
     }
-
+    public void OnJump(InputValue input)
+    {
+        if (!gameOver)
+        {
+            Debug.Log("[Controls] jump");
+            if (run && IsGrounded() && input.isPressed)
+            {
+                myRigidbody.velocity = Vector2.up * jumpVelocity;
+                timeJump = Time.time;
+                smallJumpDetector = true;
+                animator.SetBool("Jump", true);
+            }
+            else
+            {
+                //Debug.Log(timeJump +" " + timeLimitJump + " " + " ");
+                if (timeJump + timeLimitJump > Time.time && smallJumpDetector)
+                {
+                    smallJumpDetector = false;
+                    Debug.Log("[Controls] Small Jump");
+                    myRigidbody.velocity += Vector2.down * jumpVelocity / 2;
+                }
+            }
+        }
+        else
+        {
+            RestartPlayer();
+        }
+        
+    }
+    private void RestartPlayer()
+    {
+        gameOver = false;
+        gameManager.Restart();
+    }
     //FFFFFF
     public void OnYellow(InputValue input)
     {
-        ColorChange(input, ColorType.ColorList.Yellow);
+        if(!gameOver)
+            ColorChange(input, ColorType.ColorList.Yellow);
         //ffff00
         
         
     }
     public void OnBlue(InputValue input)
     {
-        ColorChange(input, ColorType.ColorList.Blue);
+        if (!gameOver)
+            ColorChange(input, ColorType.ColorList.Blue);
         //0000FF
    
     }
     public void OnRed(InputValue input)
     {
-        ColorChange(input, ColorType.ColorList.Red);
+        if (!gameOver)
+            ColorChange(input, ColorType.ColorList.Red);
         //FF0000
     
     }
     public void OnGreen(InputValue input)
     {
-        ColorChange(input, ColorType.ColorList.Green);
+        if (!gameOver)
+            ColorChange(input, ColorType.ColorList.Green);
         //00FF00
        
     }
+
     private void ColorChange(InputValue input, ColorType.ColorList colorToChange) 
     {
         if (input.isPressed)
@@ -201,12 +226,13 @@ public class Player : MonoBehaviour
         }
         Debug.Log("[Controls] : number of color pressed = " + controlsColorNumber);
         Debug.Log("[Controls] : Actual Color Type " + colorType);
-        updateColor();
+        UpdateColor();
     }
-    private void updateColor()
+    private void UpdateColor()
     {
         spriteRenderer.color = ColorType.getColor(colorType.Value);
     }
+    
     public void placePlayer()
     {
 

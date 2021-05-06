@@ -19,6 +19,7 @@ public class PlatformManager : MonoBehaviour
     #region platforms
     public GameObject[] platforms;
     private Platform platform;
+    private List<GameObject> createdPlatforms = new List<GameObject>();
     #endregion
 
     #region properties
@@ -37,7 +38,15 @@ public class PlatformManager : MonoBehaviour
         player = GameObject.Find("Player").gameObject;
         InitStartPlatform();
     }
-
+    public void Restart()
+    {
+        foreach(GameObject plat in createdPlatforms)
+        {
+            Destroy(plat);
+        }
+        createdPlatforms = new List<GameObject>();
+        InitStartPlatform();
+    }
     /// <summary>
     /// Initialize the start platform
     /// </summary>
@@ -51,6 +60,7 @@ public class PlatformManager : MonoBehaviour
         platform.PositionOnX = 7;
         platform.PositionOnY = -1.5f;
         platformWidth = platform.Length;
+        createdPlatforms.Add(start);
     }
 
     void Update()
@@ -82,8 +92,14 @@ public class PlatformManager : MonoBehaviour
         ModifyPlatformProperties(platform);
         platformPlayerIsOn = nextPlatformToCreate;
         platformWidth = platform.Length;
-    }    
+        createdPlatforms.Add(nextPlatformToCreate);
 
+    }
+    public void UpdatePlatformPos()
+    {
+        DeterminePlatformPosition();
+        ModifyPlatformPosition(platformPlayerIsOn.GetComponent<Platform>());
+    }
     /// <summary>
     /// Update the properties of the platform that will be generated
     /// </summary>
@@ -92,6 +108,11 @@ public class PlatformManager : MonoBehaviour
     {
         _platform.TextureSprite = platformSprite;
         _platform.ColorType = platformColorType;
+        _platform.PositionOnX = platformPositionOnX;
+        _platform.PositionOnY = platformPositionOnY;
+    }
+    private void ModifyPlatformPosition(Platform _platform)
+    { 
         _platform.PositionOnX = platformPositionOnX;
         _platform.PositionOnY = platformPositionOnY;
     }
