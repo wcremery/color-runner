@@ -272,11 +272,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 19274191}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f8d85c19c6a9e348998ecdb3a07f8ec, type: 3}
+  m_Script: {fileID: 11500000, guid: a38bf3813d44ab7418584132c603cca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 214216866}
-  OFFSET: 0
+  OFFSET: 10
 --- !u!61 &19274193
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2860,6 +2860,11 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 724340415}
+    - target: {fileID: 2431696059716481213, guid: a0bb010ab83109d419d85e43963257b3,
+        type: 3}
+      propertyPath: deathDetector
+      value: 
+      objectReference: {fileID: 19274192}
     - target: {fileID: 2431696059716481215, guid: a0bb010ab83109d419d85e43963257b3,
         type: 3}
       propertyPath: m_RootOrder

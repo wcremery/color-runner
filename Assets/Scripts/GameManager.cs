@@ -76,12 +76,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over");
         if (bestScoreCount < scoreCount)
         {
-            bestScoreCount = scoreCount;
+            bestScoreCount = scoreCount;Debug.Log(bestScoreCount);
             bestScore.text = bestScoreCount.ToString();
         }
         
         gameOverBestScore.text = bestScoreCount.ToString();
-        bestScore.text= bestScoreCount.ToString();
         gameOverScore.text = scoreCount.ToString();
         gameOverScreen.SetActive(true);
         scoreCount = 0;
