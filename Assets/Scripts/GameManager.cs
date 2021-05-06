@@ -1,11 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public Player player;
-    private const int RESETLIMIT = 1000;
+    public TMP_Text score;
+    private float scoreCount = 0f;
+    private float multiplier = 0f;
+    public float resetLimit = 1000f;
+    public GameObject plateformes;
+    public GameObject cameraObject;
+    public GameObject gameOverScreen;
+
     void Start()
     {
         
@@ -14,28 +22,55 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.transform.position.x > RESETLIMIT)
+        if (player.transform.position.x > resetLimit)
         {
             Debug.Log("[RELOAD] X reset");
-            GameObject[] gameObjects = FindObjectsOfType<GameObject>();
-            foreach(GameObject entity in gameObjects)
+            Transform[] gameObjects = plateformes.GetComponentsInChildren<Transform>(); /*FindObjectsOfType<GameObject>();*/
+            foreach(Transform entity in gameObjects)
             {
-                entity.transform.position = new Vector3(entity.transform.position.x - RESETLIMIT, entity.transform.position.y, entity.transform.position.z);
+                if (entity.name == "Start" || entity.name == "Platform")
+                {
+                    entity.position = new Vector3(entity.position.x - resetLimit, entity.position.y, entity.position.z);
+                }
             }
+            player.transform.position = new Vector3(player.transform.position.x - resetLimit, player.transform.position.y, player.transform.position.z);
+            //Transform[] cameraObjects = camera.GetComponentsInChildren<Transform>(); /*FindObjectsOfType<GameObject>();*/
+            //foreach (Transform entity in cameraObjects)
+            //{
+
+            //   entity.position = new Vector3(entity.position.x - resetLimit, entity.position.y, entity.position.z);
+
+            //}
+            cameraObject.transform.position = new Vector3(cameraObject.transform.position.x - resetLimit, cameraObject.transform.position.y, cameraObject.transform.position.z);
+            multiplier++;
         }
-        if(player.transform.position.y> RESETLIMIT)
+        if(player.transform.position.y> resetLimit)
         {
             Debug.Log("[RELOAD] Y reset");
-            GameObject[] gameObjects = FindObjectsOfType<GameObject>();
-            foreach (GameObject entity in gameObjects)
+            Transform[] gameObjects = plateformes.GetComponentsInChildren<Transform>(); /*FindObjectsOfType<GameObject>();*/
+            foreach (Transform entity in gameObjects)
             {
-                entity.transform.position = new Vector3(entity.transform.position.x, entity.transform.position.y - RESETLIMIT, entity.transform.position.z);
+                entity.position = new Vector3(entity.position.x - resetLimit, entity.position.y, entity.position.z);
             }
+            player.transform.position = new Vector3(player.transform.position.x - resetLimit, player.transform.position.y, player.transform.position.z);
         }
+        if ((player.transform.position.x + (multiplier * resetLimit)) - scoreCount > 1)
+        {
+            scoreCount++;
+            updateScore();
+        }
+        
     }
 
     public void GameOver()
     {
         Debug.Log("Game Over");
+        gameOverScreen.SetActive(true);
+        Time.timeScale = 0f;
+
+    }
+    private void updateScore()
+    {
+        score.text = scoreCount.ToString();
     }
 }

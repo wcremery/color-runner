@@ -41,7 +41,7 @@ public class PlatformManager : MonoBehaviour
     /// <summary>
     /// Initialize the start platform
     /// </summary>
-    private void InitStartPlatform()
+    public void InitStartPlatform()
     {
         GameObject start = Instantiate(platforms[3]);
         start.transform.parent = gameObject.transform;
@@ -58,7 +58,7 @@ public class PlatformManager : MonoBehaviour
         float playerPositionOnX = player.transform.position.x;
         float lol = platform.PositionOnX - platformWidth/2;
 
-        Debug.Log(playerPositionOnX + "\n" + lol);
+        //Debug.Log(playerPositionOnX + "\n" + lol);
         if (playerPositionOnX > lol)
         {
             CreateNewPlatform();

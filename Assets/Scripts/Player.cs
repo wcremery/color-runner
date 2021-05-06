@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     private int controlsColorNumber = 0;
     private float timeJump;
     private bool smallJumpDetector = false;
-
+    private ColorType.ColorList currentPlatformColor = ColorType.ColorList.Null;
 
 
 
@@ -46,6 +46,22 @@ public class Player : MonoBehaviour
         {
             animator.SetBool("Jump", true);
         }*/
+        if(IsAgainstWallRight() || IsOnDeath())
+        {
+            GameOver();
+        }
+        TestGround();
+    }
+    private void TestGround()
+    {
+        if (!IsGrounded())
+        {
+            currentPlatformColor = ColorType.ColorList.Null;
+        }
+        else if (currentPlatformColor != ColorType.ColorList.Null && currentPlatformColor != colorType.Variable.value)
+        {
+            GameOver();
+        }
     }
     private void StartRunning()
     {
@@ -72,11 +88,17 @@ public class Player : MonoBehaviour
     }
     private bool IsAgainstWallRight()
     {
-        RaycastHit2D raycastHit2D = Physics2D.Raycast(gameObject.transform.position, Vector2.right, 0.50f, platformsLayerMask);
-        if (raycastHit2D.collider != null) {
-            Debug.DrawLine(gameObject.transform.position, raycastHit2D.point, Color.green, 100f);
+        //Vector3 position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.5f, gameObject.transform.position.z);
+        RaycastHit2D raycastHit2D = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size*0.5f, 0f, Vector2.right, 0.5f, platformsLayerMask);
+        //RaycastHit2D raycastHit2D = Physics2D.Raycast(position, Vector2.right, 2f, platformsLayerMask);
+        //Debug.DrawLine(position , raycastHit2D.point, Color.green, 100f);
+        if (raycastHit2D.collider != null)
+        {
+            //Debug.DrawLine(position, raycastHit2D.point, Color.green, 100f);
+            Debug.Log("[Collision] Game Over Wall Right");
         }
         return raycastHit2D.collider != null;
+        //return false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -90,7 +112,7 @@ public class Player : MonoBehaviour
         GameObject collider = collision.gameObject;
         if (IsAgainstWallRight() || IsOnDeath())
         {
-            Debug.Log("[Collision] Game Over Wall Right");
+            Debug.Log("[Collision] Game Over death or wall");
             GameOver();
         }
         else
@@ -98,7 +120,8 @@ public class Player : MonoBehaviour
             Platform platform = collider.GetComponent<Platform>();
             if (platform != null)
             {
-                if(platform.colorType != ColorType.ColorList.Null && platform.colorType != colorType.Value)
+                currentPlatformColor = platform.colorType;
+                if (platform.colorType != ColorType.ColorList.Null && platform.colorType != colorType.Value)
                 {
                     Debug.Log("[Collision] Game Over Wrong Color");
                     GameOver();
@@ -106,7 +129,7 @@ public class Player : MonoBehaviour
             }
         }
     }
-
+  
     private void GameOver()
     {
         gameManager.GameOver();
@@ -183,6 +206,10 @@ public class Player : MonoBehaviour
     private void updateColor()
     {
         spriteRenderer.color = ColorType.getColor(colorType.Value);
+    }
+    public void placePlayer()
+    {
+
     }
 }
 
