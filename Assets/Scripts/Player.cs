@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
 
     public ColorReference colorType;
     public float timeLimitJump = 0.2f;
+    public DeathDetector deathDetector;
 
     private float jumpVelocity = 10f;
     private float moveSpeed =6f;
@@ -106,8 +107,11 @@ public class Player : MonoBehaviour
     {
         if (IsGrounded())
         {
+
             smallJumpDetector = false;
             animator.SetBool("Jump", false);
+
+            deathDetector.UpdateY();
         }
         Debug.Log("[Collision] Testing if Game Over");
         GameObject collider = collision.gameObject;

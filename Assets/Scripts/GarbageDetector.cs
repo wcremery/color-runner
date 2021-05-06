@@ -36,7 +36,7 @@ public class GarbageDetector : MonoBehaviour
     }
     private void FollowPlayer()
     {
-        transform.position = new Vector3(player.position.x-OFFSET, 0, transform.position.z);
+        transform.position = new Vector3(player.position.x-OFFSET, player.position.y, transform.position.z);
     }
     private void Recycle(GameObject entity)
     {
