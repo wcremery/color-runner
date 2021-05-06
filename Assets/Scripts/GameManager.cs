@@ -8,11 +8,16 @@ public class GameManager : MonoBehaviour
     public Player player;
     public TMP_Text score;
     private float scoreCount = 0f;
+    private float bestScoreCount = 0f;
     private float multiplier = 0f;
     public float resetLimit = 1000f;
     public GameObject plateformes;
     public GameObject cameraObject;
     public GameObject gameOverScreen;
+    public TMP_Text gameOverScore;
+    public TMP_Text gameOverBestScore;
+
+
 
     void Start()
     {
@@ -57,7 +62,7 @@ public class GameManager : MonoBehaviour
         if ((player.transform.position.x + (multiplier * resetLimit)) - scoreCount > 1)
         {
             scoreCount++;
-            updateScore();
+            UpdateScore();
         }
         
     }
@@ -65,11 +70,14 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game Over");
+        if (bestScoreCount < scoreCount) bestScoreCount = scoreCount;
+        gameOverBestScore.text = bestScoreCount.ToString();
+        gameOverScore.text = scoreCount.ToString();
         gameOverScreen.SetActive(true);
         Time.timeScale = 0f;
 
     }
-    private void updateScore()
+    private void UpdateScore()
     {
         score.text = scoreCount.ToString();
     }

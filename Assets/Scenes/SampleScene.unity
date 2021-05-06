@@ -1394,6 +1394,8 @@ MonoBehaviour:
   plateformes: {fileID: 1846779490}
   cameraObject: {fileID: 519420028}
   gameOverScreen: {fileID: 2142954403}
+  gameOverScore: {fileID: 231884282}
+  gameOverBestScore: {fileID: 255220247}
 --- !u!4 &724340416
 Transform:
   m_ObjectHideFlags: 0
