@@ -29,15 +29,21 @@ public class Player : MonoBehaviour
     private bool smallJumpDetector = false;
     private ColorType.ColorList currentPlatformColor = ColorType.ColorList.Null;
     private bool gameOver = false;
+    public float FallingThreshold = -10f;
+    public float JumpingThreshold;
 
-
-
+    private bool HasStarted = false;
     // Update is called once per frame
     void Update()
     {
         if (run)
         {
             myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y);
+        }
+        if (myRigidbody.velocity.y < FallingThreshold)
+        {
+            animator.SetBool("Fall", true);
+            animator.SetBool("Jump", false);
         }
         /*if (myRigidbody.velocity.y > 0)
         {
@@ -90,26 +96,31 @@ public class Player : MonoBehaviour
     }
     private bool IsAgainstWallRight()
     {
-        //Vector3 position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.5f, gameObject.transform.position.z);
-        RaycastHit2D raycastHit2D = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size*0.5f, 0f, Vector2.right, 0.5f, platformsLayerMask);
-        //RaycastHit2D raycastHit2D = Physics2D.Raycast(position, Vector2.right, 2f, platformsLayerMask);
-        //Debug.DrawLine(position , raycastHit2D.point, Color.green, 100f);
-        if (raycastHit2D.collider != null)
+        if (HasStarted)
         {
-            //Debug.DrawLine(position, raycastHit2D.point, Color.green, 100f);
-            Debug.Log("[Collision] Game Over Wall Right");
+            //Vector3 position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.5f, gameObject.transform.position.z);
+            RaycastHit2D raycastHit2D = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size * 0.5f, 0f, Vector2.right, 0.5f, platformsLayerMask);
+            //RaycastHit2D raycastHit2D = Physics2D.Raycast(position, Vector2.right, 2f, platformsLayerMask);
+
+            if (raycastHit2D.collider != null)
+            {
+                Debug.Log(raycastHit2D.collider.transform.name);
+                Debug.DrawLine(gameObject.transform.position, raycastHit2D.point, Color.green, 100f);
+                Debug.Log("[Collision] Game Over Wall Right");
+            }
+            return raycastHit2D.collider != null;
+            //return false;
         }
-        return raycastHit2D.collider != null;
-        //return false;
+        return false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (IsGrounded())
         {
-
+            if (!HasStarted) HasStarted = true;
             smallJumpDetector = false;
-            animator.SetBool("Jump", false);
+            animator.SetBool("Fall", false);
 
             deathDetector.UpdateY();
         }
@@ -178,6 +189,7 @@ public class Player : MonoBehaviour
     }
     private void RestartPlayer()
     {
+        HasStarted = false;
         gameOver = false;
         gameManager.Restart();
     }
