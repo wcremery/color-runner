@@ -97,7 +97,10 @@ public class GameManager : MonoBehaviour
     }
     public void Restart()
     {
+
         platformManager.Restart();
+        scoreCount = 0;
+        score.text = "0";
         player.transform.position = new Vector3(0, 0, 0);
         gameOverScreen.SetActive(false);
         Time.timeScale = 1f;
