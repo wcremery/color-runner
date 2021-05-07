@@ -804,7 +804,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54.7
+  m_fontSize: 64.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2357,7 +2357,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54.7
+  m_fontSize: 64.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2860,6 +2860,11 @@ PrefabInstance:
       propertyPath: deathDetector
       value: 
       objectReference: {fileID: 19274192}
+    - target: {fileID: 2431696059716481213, guid: a0bb010ab83109d419d85e43963257b3,
+        type: 3}
+      propertyPath: FallingThreshold
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 2431696059716481215, guid: a0bb010ab83109d419d85e43963257b3,
         type: 3}
       propertyPath: m_RootOrder
