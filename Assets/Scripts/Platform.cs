@@ -38,7 +38,7 @@ public class Platform : MonoBehaviour
     
     void Start()
     {
-        transform.position = new Vector3(positionOnX, positionOnY, 0);
+        transform.localPosition = new Vector3(positionOnX, positionOnY, 0);
         InstantiateAllPrefabHolder();
     }
 

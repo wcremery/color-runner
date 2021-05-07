@@ -10,25 +10,31 @@ using Random = UnityEngine.Random;
 public class PlatformManager : MonoBehaviour
 {
     #region sprites
+
     public Sprite blueSprite;
     public Sprite greenSprite;
     public Sprite redSprite;
     public Sprite yellowSprite;
+
     #endregion
 
     #region platforms
+
     public GameObject[] platforms;
     private Platform platform;
     private List<GameObject> createdPlatforms = new List<GameObject>();
+
     #endregion
 
     #region properties
+
     private Sprite platformSprite;
     private float platformPositionOnX;
     private float platformPositionOnY;
     private float platformWidth;
     private ColorType.ColorList platformColorType;
     private GameObject platformPlayerIsOn;
+
     #endregion
 
     private GameObject player;
@@ -38,15 +44,18 @@ public class PlatformManager : MonoBehaviour
         player = GameObject.Find("Player").gameObject;
         InitStartPlatform();
     }
+
     public void Restart()
     {
-        foreach(GameObject plat in createdPlatforms)
+        foreach (GameObject plat in createdPlatforms)
         {
             Destroy(plat);
         }
+
         createdPlatforms = new List<GameObject>();
         InitStartPlatform();
     }
+
     /// <summary>
     /// Initialize the start platform
     /// </summary>
@@ -57,26 +66,27 @@ public class PlatformManager : MonoBehaviour
         start.name = "Start";
         platformPlayerIsOn = start;
         platform = platformPlayerIsOn.GetComponent<Platform>();
-        platform.PositionOnX = 7;
-        platform.PositionOnY = -1.5f;
+        platformPositionOnX = 9;
+        platformPositionOnY = -1.5f;
         platformWidth = platform.Length;
+        ModifyPlatformPosition(ref platform);
         createdPlatforms.Add(start);
     }
 
     void Update()
     {
         float playerPositionOnX = player.transform.position.x;
-        float lol = platform.PositionOnX - platformWidth/2;
+        float lol = platformPlayerIsOn.transform.position.x - (platformWidth / 2);
 
-        //Debug.Log(playerPositionOnX + "\n" + lol);
+        // Debug.Log(playerPositionOnX + "\n" + lol);
         if (playerPositionOnX > lol)
         {
             CreateNewPlatform();
-            
         }
     }
 
     #region platform's creation
+
     /// <summary>
     /// Create a new a platform
     /// </summary>
@@ -86,33 +96,36 @@ public class PlatformManager : MonoBehaviour
         nextPlatformToCreate.transform.parent = gameObject.transform;
         nextPlatformToCreate.name = "Platform";
         platform = nextPlatformToCreate.GetComponent<Platform>();
-        
-        SelectPlatformColorType();
-        DeterminePlatformPosition();
-        ModifyPlatformProperties(platform);
-        platformPlayerIsOn = nextPlatformToCreate;
-        platformWidth = platform.Length;
-        createdPlatforms.Add(nextPlatformToCreate);
 
+        SelectPlatformColorType();
+        DeterminePlatformPosition(ref platform);
+        ModifyPlatformProperties(ref platform);
+
+        platformWidth = platform.Length;
+        platformPlayerIsOn = nextPlatformToCreate;
+        createdPlatforms.Add(nextPlatformToCreate);
     }
+
     public void UpdatePlatformPos()
     {
-        DeterminePlatformPosition();
-        ModifyPlatformPosition(platformPlayerIsOn.GetComponent<Platform>());
+        // DeterminePlatformPosition();
+        // ModifyPlatformPosition(platformPlayerIsOn.GetComponent<Platform>());
     }
+
     /// <summary>
     /// Update the properties of the platform that will be generated
     /// </summary>
     /// <param name="_platform">the platform</param>
-    private void ModifyPlatformProperties(Platform _platform)
+    private void ModifyPlatformProperties(ref Platform _platform)
     {
         _platform.TextureSprite = platformSprite;
         _platform.ColorType = platformColorType;
         _platform.PositionOnX = platformPositionOnX;
         _platform.PositionOnY = platformPositionOnY;
     }
-    private void ModifyPlatformPosition(Platform _platform)
-    { 
+
+    private void ModifyPlatformPosition(ref Platform _platform)
+    {
         _platform.PositionOnX = platformPositionOnX;
         _platform.PositionOnY = platformPositionOnY;
     }
@@ -120,9 +133,12 @@ public class PlatformManager : MonoBehaviour
     /// <summary>
     /// Determine the platform position on X and Y
     /// </summary>
-    private void DeterminePlatformPosition()
+    /// <param name="nextPlatform"></param>
+    private void DeterminePlatformPosition(ref Platform nextPlatform)
     {
-        platformPositionOnX = platformPlayerIsOn.GetComponent<Platform>().PositionOnX + platformWidth + Random.Range(2, 4);
+        platformPositionOnX = platformPlayerIsOn.GetComponent<Platform>().PositionOnX + (platformWidth / 2) +
+                              (nextPlatform.Length / 2) +
+                              Random.Range(2, 4);
         platformPositionOnY = platformPlayerIsOn.GetComponent<Platform>().PositionOnY + Random.Range(-2, 2);
     }
 
@@ -156,14 +172,15 @@ public class PlatformManager : MonoBehaviour
                 break;
         }
     }
-    
+
     /// <summary>
     /// Select the platform length
     /// </summary>
     private GameObject SelectPlatformLength()
     {
-        int index = Random.Range(0, 4);
+        int index = Random.Range(1, 4);
         return platforms[index];
     }
+
     #endregion
 }
