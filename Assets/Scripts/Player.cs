@@ -195,6 +195,8 @@ public class Player : MonoBehaviour
     {
         HasStarted = false;
         gameOver = false;
+        animator.SetBool("Fall", false);
+        animator.SetBool("Jump", false);
         gameManager.Restart();
     }
     //FFFFFF
