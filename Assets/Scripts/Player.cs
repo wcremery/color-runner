@@ -158,6 +158,10 @@ public class Player : MonoBehaviour
         }
         
     }
+    public void OnQuit()
+    {
+        gameManager.QuitGame();
+    }
     public void OnJump(InputValue input)
     {
         if (!gameOver)
